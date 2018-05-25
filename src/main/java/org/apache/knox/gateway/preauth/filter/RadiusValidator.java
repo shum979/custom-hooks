@@ -5,7 +5,7 @@ package org.apache.knox.gateway.preauth.filter;
  */
 
 import com.google.common.base.Strings;
-import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.knox.gateway.GatewayMessages;
 import org.apache.knox.gateway.i18n.messages.MessagesFactory;
 import org.apache.shiro.codec.Base64;

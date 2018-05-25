@@ -17,24 +17,18 @@
  */
 package org.apache.knox.gateway.preauth.filter;
 
+import org.apache.knox.gateway.security.PrimaryPrincipal;
+
+import javax.security.auth.Subject;
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.AccessController;
 import java.security.Principal;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.List;
-
-import javax.security.auth.Subject;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.knox.gateway.security.PrimaryPrincipal;
 
 public class PreAuthFederationFilter implements Filter {
   private static final String CUSTOM_HEADER_PARAM = "preauth.customHeader";
@@ -82,7 +76,6 @@ public class PreAuthFederationFilter implements Filter {
    * Recreate the current Subject based upon the provided mappedPrincipal
    * and look for the groups that should be associated with the new Subject.
    * Upon finding groups mapped to the principal - add them to the new Subject.
-   * @param mappedPrincipalName
    * @throws ServletException
    * @throws IOException
    */

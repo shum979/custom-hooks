@@ -19,7 +19,6 @@ package org.apache.knox.gateway.provider.federation;
 
 import org.apache.knox.gateway.preauth.filter.IPValidator;
 import org.apache.knox.gateway.preauth.filter.PreAuthValidationException;
-import org.apache.knox.gateway.preauth.filter.RadiusValidator;
 import org.junit.Test;
 
 import javax.servlet.FilterConfig;
@@ -56,21 +55,5 @@ public class IPValidatorTest extends org.junit.Assert {
     when(filterConfig.getInitParameter(IPValidator.IP_ADDRESSES_PARAM)).thenReturn("10.22.34.56");
     assertFalse(ipv.validate(request, filterConfig));
   }
-
-    @Test
-    public void testRadiusValidator() throws PreAuthValidationException {
-        RadiusValidator ipv = new RadiusValidator();
-        final HttpServletRequest request = mock(HttpServletRequest.class);
-
-        when(request.getHeader("Authorization")).thenReturn("Basic:c3JvX3Rlc3RAdGVzdC5jb206UGFzc3dvcmQ0NTY=");
-
-        final FilterConfig filterConfig = mock(FilterConfig.class);
-
-        when(filterConfig.getInitParameter(RadiusValidator.RADIUS_AUTH_SERVICE_URL)).thenReturn("https://localhost:443/api/authenticate");
-        when(filterConfig.getInitParameter(RadiusValidator.IS_SSL_ENABLED)).thenReturn("true");
-
-        assertTrue(ipv.validate(request, filterConfig));
-    }
-
 
 }
